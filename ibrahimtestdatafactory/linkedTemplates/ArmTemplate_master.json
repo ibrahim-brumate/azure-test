@@ -1,0 +1,84 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ibrahimtestdatafactory"
+		},
+		"AzureDataExplorerLinkedService_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureDataExplorerLinkedService'"
+		},
+		"AzureStorageLinkedService_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureStorageLinkedService'"
+		},
+		"AzureDataExplorerLinkedService_properties_typeProperties_endpoint": {
+			"type": "string",
+			"defaultValue": "https://ibrahimtest.brazilsouth.kusto.windows.net"
+		},
+		"AzureDataExplorerLinkedService_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "7e2215f3-dae3-4ac3-8e3b-88daa8db7d37"
+		},
+		"AzureDataExplorerLinkedService_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "da538514-b5d8-4248-a658-65bbd3bee750"
+		},
+		"AzureDataExplorerLinkedService_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "catalogsdb"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ibrahimtestdatafactory_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureDataExplorerLinkedService_servicePrincipalKey": {
+						"value": "[parameters('AzureDataExplorerLinkedService_servicePrincipalKey')]"
+					},
+					"AzureStorageLinkedService_connectionString": {
+						"value": "[parameters('AzureStorageLinkedService_connectionString')]"
+					},
+					"AzureDataExplorerLinkedService_properties_typeProperties_endpoint": {
+						"value": "[parameters('AzureDataExplorerLinkedService_properties_typeProperties_endpoint')]"
+					},
+					"AzureDataExplorerLinkedService_properties_typeProperties_tenant": {
+						"value": "[parameters('AzureDataExplorerLinkedService_properties_typeProperties_tenant')]"
+					},
+					"AzureDataExplorerLinkedService_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('AzureDataExplorerLinkedService_properties_typeProperties_servicePrincipalId')]"
+					},
+					"AzureDataExplorerLinkedService_properties_typeProperties_database": {
+						"value": "[parameters('AzureDataExplorerLinkedService_properties_typeProperties_database')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "ibrahimtestdatafactory"
+		},
+		"AzureDataExplorerLinkedService_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureStorageLinkedService_connectionString": {
+			"value": ""
+		},
+		"AzureDataExplorerLinkedService_properties_typeProperties_endpoint": {
+			"value": "https://ibrahimtest.brazilsouth.kusto.windows.net"
+		},
+		"AzureDataExplorerLinkedService_properties_typeProperties_tenant": {
+			"value": "7e2215f3-dae3-4ac3-8e3b-88daa8db7d37"
+		},
+		"AzureDataExplorerLinkedService_properties_typeProperties_servicePrincipalId": {
+			"value": "da538514-b5d8-4248-a658-65bbd3bee750"
+		},
+		"AzureDataExplorerLinkedService_properties_typeProperties_database": {
+			"value": "catalogsdb"
+		}
+	}
+}
