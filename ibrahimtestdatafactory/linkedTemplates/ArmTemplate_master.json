@@ -4,16 +4,16 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Data Factory name",
+			"metadata": "Nome do Data Factory",
 			"defaultValue": "ibrahimtestdatafactory"
 		},
 		"AzureDataExplorerLinkedService_servicePrincipalKey": {
 			"type": "secureString",
-			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureDataExplorerLinkedService'"
+			"metadata": "Cadeia de caracteres segura para 'servicePrincipalKey' de 'AzureDataExplorerLinkedService'"
 		},
 		"AzureStorageLinkedService_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureStorageLinkedService'"
+			"metadata": "Cadeia de caracteres segura para 'connectionString' de 'AzureStorageLinkedService'"
 		},
 		"AzureDataExplorerLinkedService_properties_typeProperties_endpoint": {
 			"type": "string",
@@ -33,11 +33,11 @@
 		},
 		"containerUri": {
 			"type": "string",
-			"metadata": "URI to storage account containing linked ARM templates"
+			"metadata": "URI para a conta de armazenamento contendo os modelos do ARM vinculados"
 		},
 		"containerSasToken": {
 			"type": "string",
-			"metadata": "Sas token to storage account containing linked ARM templates"
+			"metadata": "Token SAS para a conta de armazenamento contendo modelos do ARM vinculados"
 		}
 	},
 	"variables": {

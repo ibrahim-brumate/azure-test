@@ -4,16 +4,16 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Data Factory name",
+			"metadata": "Nome do Data Factory",
 			"defaultValue": "ibrahimtestdatafactory"
 		},
 		"AzureDataExplorerLinkedService_servicePrincipalKey": {
 			"type": "secureString",
-			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureDataExplorerLinkedService'"
+			"metadata": "Cadeia de caracteres segura para 'servicePrincipalKey' de 'AzureDataExplorerLinkedService'"
 		},
 		"AzureStorageLinkedService_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureStorageLinkedService'"
+			"metadata": "Cadeia de caracteres segura para 'connectionString' de 'AzureStorageLinkedService'"
 		},
 		"AzureDataExplorerLinkedService_properties_typeProperties_endpoint": {
 			"type": "string",
@@ -70,6 +70,35 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ADXCats')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataExplorerLinkedService",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureDataExplorerTable",
+				"schema": [
+					{
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"name": "age",
+						"type": "long"
+					}
+				],
+				"typeProperties": {
+					"table": "cats"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataExplorerLinkedService')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Cats')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -107,35 +136,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ADXCats')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureDataExplorerLinkedService",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureDataExplorerTable",
-				"schema": [
-					{
-						"name": "name",
-						"type": "string"
-					},
-					{
-						"name": "age",
-						"type": "long"
-					}
-				],
-				"typeProperties": {
-					"table": "cats"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataExplorerLinkedService')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -167,11 +167,37 @@
 							},
 							"sink": {
 								"type": "AzureDataExplorerSink",
-								"ingestionMappingName": "catsmapping"
+								"ingestionMappingName": "cats_mapping"
 							},
 							"enableStaging": false,
 							"translator": {
 								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "name",
+											"type": "String",
+											"physicalType": "string"
+										}
+									},
+									{
+										"source": {
+											"name": "age",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "age",
+											"type": "Int64",
+											"physicalType": "long"
+										}
+									}
+								],
 								"typeConversion": true,
 								"typeConversionSettings": {
 									"allowDataTruncation": true,
