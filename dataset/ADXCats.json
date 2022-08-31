@@ -1,0 +1,24 @@
+{
+	"name": "ADXCats",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataExplorerLinkedService",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureDataExplorerTable",
+		"schema": [
+			{
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"name": "age",
+				"type": "long"
+			}
+		],
+		"typeProperties": {
+			"table": "cats"
+		}
+	}
+}
